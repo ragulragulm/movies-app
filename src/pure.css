@@ -1,14 +1,28 @@
 
-/* Base Styles */
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
+:root {
+  --color-primary: #030014;
+  --color-light-100: #cecefb;
+  --color-light-200: #a8b5db;
+  --color-gray-100: #9ca4ab;
+  --color-dark-100: #0f0d23;
+  --font-dm-sans: 'DM Sans', sans-serif;
+  --breakpoint-xs: 480px;
+  --background-image-hero-pattern: url("/hero-bg.png");
+}
+
+/* Base styles */
 body {
-  font-family: "DM Sans", sans-serif;
-  background-color: #030014;
-  margin: 0;
-  padding: 0;
+  margin-top: 0px;
+  font-family: "DM Sans", serif;
+  font-optical-sizing: auto;
+  background: #030014;
 }
 
 h1 {
-  max-width: 64rem;
+  max-width: 56rem; /* 896px */
   margin: 0 auto;
   text-align: center;
   font-size: 3rem;
@@ -16,6 +30,7 @@ h1 {
   line-height: 1.2;
   letter-spacing: -0.01em;
   color: white;
+  
 }
 
 @media (min-width: 640px) {
@@ -31,7 +46,7 @@ h2 {
   color: white;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 480px) {
   h2 {
     font-size: 1.875rem;
   }
@@ -40,36 +55,36 @@ h2 {
 main {
   min-height: 100vh;
   position: relative;
-  background-color: #030014;
+  background: var(--color-primary);
 }
 
 header {
   margin-top: 1.25rem;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 480px) {
   header {
     margin-top: 2.5rem;
   }
 }
 
 header img {
-  display: block;
+   display: block;
   width: 100%;
   max-width: 32rem;
   height: auto;
   object-fit: contain;
   margin: 0 auto;
-  filter: drop-shadow(0 0 0.75rem rgba(0,0,0,0.5));
+  filter: drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));
 }
 
-/* Components */
+/* Component styles */
 .pattern {
-  background-image: url("/hero-bg.png");
-  background-position: center;
-  background-size: cover;
+  background: var(--background-image-hero-pattern);
   width: 100%;
   height: 100vh;
+  background-position: center;
+  background-size: cover;
   position: absolute;
   z-index: 0;
 }
@@ -77,11 +92,18 @@ header img {
 .wrapper {
   padding: 3rem 1.25rem;
   max-width: 80rem;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   flex-direction: column;
   position: relative;
   z-index: 10;
+}
+
+@media (min-width: 480px) {
+  .wrapper {
+    padding: 2.5rem;
+  }
 }
 
 .trending {
@@ -114,7 +136,7 @@ header img {
   -webkit-text-stroke: 5px rgba(206, 206, 251, 0.5);
   font-size: 190px;
   font-family: "Bebas Neue", sans-serif;
-  margin-top: 1.375rem;
+  margin-top: 22px;
   white-space: nowrap;
 }
 
@@ -128,7 +150,7 @@ header img {
 
 .search {
   width: 100%;
-  background-color: rgba(206, 206, 251, 0.05);
+  background: rgba(206, 206, 251, 0.05);
   padding: 0.75rem 1rem;
   border-radius: 0.5rem;
   margin-top: 2.5rem;
@@ -151,7 +173,7 @@ header img {
 }
 
 .search input {
-  width: 100%;
+   width: 100%;
   background-color: transparent;
   padding: 0.5rem 0.625rem 0.5rem 2.5rem;
   font-size: 1rem;
@@ -160,43 +182,51 @@ header img {
   outline: none;
 }
 
+@media (min-width: 480px) {
+  .search input {
+    padding-right: 2.5rem;
+  }
+}
+
 .search input::placeholder {
-  color: #a8b5db;
+  color: var(--color-light-200);
 }
 
 .all-movies {
-  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
 }
 
 .all-movies ul {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
   gap: 1.25rem;
 }
 
 @media (min-width: 480px) {
   .all-movies ul {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (min-width: 768px) {
   .all-movies ul {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
 @media (min-width: 1024px) {
   .all-movies ul {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
 .movie-card {
-  background-color: #0f0d23;
+  background: var(--color-dark-100);
   padding: 1.25rem;
   border-radius: 1rem;
-  box-shadow: inset 0 0 0.75rem rgba(206, 206, 251, 0.1);
+  box-shadow: inset 0 2px 4px 0 rgba(206, 206, 251, 0.1);
 }
 
 .movie-card img {
@@ -210,20 +240,23 @@ header img {
   font-weight: bold;
   font-size: 1rem;
   overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
 }
 
 .movie-card .content {
   margin-top: 0.5rem;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: row;
   align-items: center;
+  flex-wrap: wrap;
   gap: 0.5rem;
 }
 
 .movie-card .rating {
   display: flex;
+  flex-direction: row;
   align-items: center;
   gap: 0.25rem;
 }
@@ -242,19 +275,66 @@ header img {
 
 .movie-card .content span {
   font-size: 0.875rem;
-  color: #9ca4ab;
+  color: var(--color-gray-100);
 }
 
-.movie-card .lang,
-.movie-card .year {
-  color: #9ca4ab;
+.movie-card .content .lang {
+  text-transform: capitalize;
+  color: var(--color-gray-100);
   font-weight: 500;
   font-size: 1rem;
-  text-transform: capitalize;
 }
 
+.movie-card .content .year {
+  color: var(--color-gray-100);
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+/* Utility classes */
 .text-gradient {
   background: linear-gradient(to right, #D6C7FF, #AB8BFF);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.fancy-text {
+  -webkit-text-stroke: 5px rgba(206, 206, 251, 0.5);
+  font-size: 190px;
+  font-family: "Bebas Neue", sans-serif;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Loading animation */
+.loading-text {
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.loading-text span {
+  animation: blink 1.4s infinite;
+}
+
+.loading-text span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loading-text span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes blink {
+  0%   { opacity: 0; }
+  50%  { opacity: 1; }
+  100% { opacity: 0; }
 }
